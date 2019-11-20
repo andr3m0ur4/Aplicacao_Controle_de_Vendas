@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Listagem de pessoas </title>
+	<link rel="stylesheet" type="text/css" href="css/list.css" media="screen">
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr>
+				<th> </th>
+				<th> </th>
+				<th> Id </th>
+				<th> Nome </th>
+				<th> Endereço </th>
+				<th> Bairro </th>
+				<th> Telefone </th>
+			</tr>
+		</thead>
+		<tbody>
+			{items}
+		</tbody>
+	</table>
+	<button onclick="window.location='index.php?class=PessoaForm'">
+		<img src="images/insert.svg" style="width: 17px"> Inserir
+	</button>
+</body>
+</html>
