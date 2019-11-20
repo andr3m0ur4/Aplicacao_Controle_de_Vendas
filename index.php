@@ -1,15 +1,19 @@
 <?php
 
+date_default_timezone_set ( 'America/Sao_Paulo' );
+
+if ( version_compare ( PHP_VERSION, '7.0.0' ) == -1 ) {
+    die ( 'A versão mínima do PHP para rodar esta aplicação é: 7.0.0' );
+}
+
 // library loader
 require_once 'Lib/Livro/Core/ClassLoader.php';
-
 $al = new Livro\Core\ClassLoader;
 $al -> addNamespace ( 'Livro', 'Lib/Livro' );
 $al -> register ( );
 
 // aplication loader
 require_once 'Lib/Livro/Core/AppLoader.php';
-
 $al = new Livro\Core\AppLoader;
 $al -> addDirectory ( 'App/Control' );
 $al -> addDirectory ( 'App/Model' );
@@ -21,7 +25,6 @@ $loader -> register ( );
 
 // lê o conteúdo do template
 $template = file_get_contents ( 'App/Templates/template.html' );
-
 $content = '';
 $class = 'Home';
 
