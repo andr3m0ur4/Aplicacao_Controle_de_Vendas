@@ -1,4 +1,5 @@
 <?php
+
 namespace Livro\Traits;
 
 use Livro\Database\Transaction;
@@ -10,29 +11,26 @@ trait SaveTrait
     /**
      * Salva os dados do formulário
      */
-    function onSave()
+    function onSave ( )
     {
-        try
-        {
-            Transaction::open( $this->connection );
+        try {
+            Transaction::open ( $this -> connection );  // abre transação
             
-            $class = $this->activeRecord;
-            $dados = $this->form->getData();
+            $class = $this -> activeRecord;             // classe de Active Record
+            $dados = $this -> form -> getData ( );      // lê dados do form
             
-            $object = new $class; // instancia objeto
-            $object->fromArray( (array) $dados); // carrega os dados
-            $object->store(); // armazena o objeto
+            $object = new $class;                       // instancia objeto
+            $object -> fromArray ( ( array ) $dados );  // carrega os dados
+            $object -> store ( );                       // armazena o objeto
             
-            $dados->id = $object->id;
-            $this->form->setData($dados);
+            $dados -> id = $object -> id;
+            $this -> form -> setData ( $dados );
             
-            Transaction::close(); // finaliza a transação
-            new Message('info', 'Dados armazenados com sucesso');
+            Transaction::close ( );                     // finaliza a transação
+            new Message ( 'info', 'Dados armazenados com sucesso' );
             
-        }
-        catch (Exception $e)
-        {
-            new Message('error', $e->getMessage());
+        } catch (Exception $e) {
+            new Message ( 'error', $e -> getMessage ( ) );
         }
     }
 }
