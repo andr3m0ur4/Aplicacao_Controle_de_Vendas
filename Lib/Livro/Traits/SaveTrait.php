@@ -29,7 +29,7 @@ trait SaveTrait
             Transaction::close ( );                     // finaliza a transação
             new Message ( 'info', 'Dados armazenados com sucesso' );
             
-        } catch (Exception $e) {
+        } catch ( Exception $e ) {
             new Message ( 'error', $e -> getMessage ( ) );
         }
     }
