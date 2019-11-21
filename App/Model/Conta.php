@@ -47,7 +47,7 @@ class Conta extends Record
 		$date -> add ( new DateInterval ( 'P' . $delay . 'D' ) );
 		for ( $n = 1; $n <= $parcelas; $n++ ) {
 			$conta = new self;
-			$conta -> id_cliente = $id_cliente
+			$conta -> id_cliente = $id_cliente;
 			$conta -> dt_emissao = date ( 'Y-m-d' );
 			$conta -> dt_vencimento = $date -> format ( 'Y-m-d' );
 			$conta -> valor = $valor / $parcelas;
