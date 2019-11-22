@@ -13,7 +13,7 @@ use Livro\Widgets\Wrapper\FormWrapper;
 use Livro\Traits\SaveTrait;
 use Livro\Traits\EditTrait;
 
-class ProdutosForm extends Page 
+class ProdutosForm extends Page
 {
 	private $form, $connection, $activeRecord;
 
