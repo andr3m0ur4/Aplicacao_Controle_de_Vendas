@@ -1,20 +1,20 @@
 <?php
+
 namespace Livro\Session;
 
 /**
  * Gerencia o registro da seção
- * @author Pablo Dall'Oglio
+ * @author André Moura
  */
 class Session
 {
     /**
      * inicializa uma seção
      */
-    public function __construct()
+    public function __construct ( )
     {
-        if (!session_id())
-        {
-            session_start();
+        if ( !session_id ( ) ) {
+            session_start ( );
         }
     }
 
@@ -23,7 +23,7 @@ class Session
      * @param $var     = Nome da variável
      * @param $value = Valor
      */
-    public static function setValue($var, $value)
+    public static function setValue ( $var, $value )
     {
         $_SESSION[$var] = $value;
     }
@@ -32,10 +32,9 @@ class Session
      * Retorna uma variável da seção
      * @param $var = Nome da variável
      */
-    public static function getValue($var)
+    public static function getValue ( $var )
     {
-        if (isset($_SESSION[$var]))
-        {
+        if ( isset ( $_SESSION[$var] ) ) {
             return $_SESSION[$var];
         }
     }
@@ -43,9 +42,9 @@ class Session
     /**
      * Destrói os dados de uma seção
      */
-    public static function freeSession()
+    public static function freeSession ( )
     {
-        $_SESSION = array();
-        session_destroy();
+        $_SESSION = array ( );
+        session_destroy ( );
     }
 }
