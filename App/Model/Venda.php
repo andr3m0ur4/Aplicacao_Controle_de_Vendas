@@ -57,4 +57,33 @@ class Venda extends Record
 		$this -> itens = $repositorio -> load ( $criterio );	// carrega a coleção
 		return $this -> itens;	// retorna os itens
 	}
+
+	public static function getVendasMes ( )
+	{
+		$meses = array ( );
+		$meses[1] = 'Janeiro';
+		$meses[2] = 'Fevereiro';
+		$meses[3] = 'Março';
+		$meses[4] = 'Abril';
+		$meses[5] = 'Maio';
+		$meses[6] = 'Junho';
+		$meses[7] = 'Julho';
+		$meses[8] = 'Agosto';
+		$meses[9] = 'Setembro';
+		$meses[10] = 'Outubro';
+		$meses[11] = 'Novembro';
+		$meses[12] = 'Dezembro';
+
+		$conn = Transaction::get ( );
+		$result = $conn -> query ( "SELECT DATE_FORMAT(data_venda, '%m') AS mes, sum(valor_final) AS valor 
+									FROM venda GROUP BY 1" 
+		);
+		$dataset = [];
+
+		foreach ( $result as $row ) {
+			$mes = $meses[( int ) $row['mes']];
+			$dataset[$mes] = $row['valor'];
+		}
+		return $dataset;
+	}
 }
