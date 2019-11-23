@@ -6,13 +6,13 @@ if ( version_compare ( PHP_VERSION, '7.0.0' ) == -1 ) {
     die ( 'A versão mínima do PHP para rodar esta aplicação é: 7.0.0' );
 }
 
-// library loader
+// Library loader
 require_once 'Lib/Livro/Core/ClassLoader.php';
 $al = new Livro\Core\ClassLoader;
 $al -> addNamespace ( 'Livro', 'Lib/Livro' );
 $al -> register ( );
 
-// aplication loader
+// Aplication loader
 require_once 'Lib/Livro/Core/AppLoader.php';
 $al = new Livro\Core\AppLoader;
 $al -> addDirectory ( 'App/Control' );
@@ -23,32 +23,42 @@ $al -> register ( );
 $loader = require 'vendor/autoload.php';
 $loader -> register ( );
 
-// lê o conteúdo do template
-$template = file_get_contents ( 'App/Templates/template.html' );
+use Livro\Session\Session;
+
 $content = '';
-$class = 'Home';
 
-if ( $_GET ) {
+new Session;
+
+if ( Session::getValue ( 'logged' ) ) {
+	// lê o conteúdo do template
+	$template = file_get_contents ( 'App/Templates/template.html' );
+	$class = 'Home';
+} else {
+	$template = file_get_contents ( 'App/Templates/login.html' );
+	$class = 'LoginForm';
+}
+
+if ( isset ( $_GET['class'] ) AND Session::getValue ( 'logged' ) ) {
 	$class = $_GET['class'];
+}
 
-	if ( class_exists ( $class ) ) {
-		try {
-			$pagina = new $class;			// instancia a classe
+if ( class_exists ( $class ) ) {
+	try {
+		$pagina = new $class;			// instancia a classe
 
-			ob_start ( );					// inicia controle de output
+		ob_start ( );					// inicia controle de output
 
-			$pagina -> show ( );			// exibe página
+		$pagina -> show ( );			// exibe página
 
-			$content = ob_get_contents ( );	// lê conteúdo gerado
+		$content = ob_get_contents ( );	// lê conteúdo gerado
 
-			ob_end_clean ( );				// finaliza controle de output
+		ob_end_clean ( );				// finaliza controle de output
 
-		} catch (Exception $e) {
-			$content = $e -> getMessage ( ) . '<br>' . $e -> getTraceAsString ( );
-		}
-	} else {
-		$content = "Class <b>{$class}</b> not found";
+	} catch ( Exception $e ) {
+		$content = $e -> getMessage ( ) . '<br>' . $e -> getTraceAsString ( );
 	}
+} else {
+	$content = "Class <b>{$class}</b> not found";
 }
 
 // injeta conteúdo gerado dentro do template
