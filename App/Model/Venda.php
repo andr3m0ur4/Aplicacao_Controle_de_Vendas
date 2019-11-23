@@ -53,7 +53,7 @@ class Venda extends Record
 
 		// define o critério de filtro
 		$criterio = new Criteria;
-		$criterio -> add ( 'item_venda', '=', $this -> id );
+		$criterio -> add ( 'id_venda', '=', $this -> id );
 		$this -> itens = $repositorio -> load ( $criterio );	// carrega a coleção
 		return $this -> itens;	// retorna os itens
 	}
