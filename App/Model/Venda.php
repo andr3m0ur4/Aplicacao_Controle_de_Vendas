@@ -86,4 +86,24 @@ class Venda extends Record
 		}
 		return $dataset;
 	}
+
+	public static function getVendasTipo ( )
+	{
+		$conn = Transaction::get ( );
+        $result = $conn -> query ( "SELECT tipo.nome AS tipo, 
+        								sum(item_venda.quantidade * item_venda.preco) AS total
+                                    FROM venda, item_venda, produto, tipo
+                                   	WHERE venda.id = item_venda.id_venda 
+                                     	AND item_venda.id_produto = produto.id
+                                     	AND produto.id_tipo = tipo.id
+                                	GROUP BY 1"
+        );
+        
+        $dataset = [];
+        foreach ( $result as $row ) {
+            $dataset[ $row['tipo'] ] = $row['total'];
+        }
+        
+        return $dataset;
+	}
 }
