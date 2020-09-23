@@ -25,11 +25,11 @@ final class Connection
     public static function open ( $name )
     {
         // verifica se existe arquivo de configuração para este banco de dados
-        if ( file_exists ( "App/Config/{$name}.ini" ) ) {
+        if ( file_exists ( "App/config/{$name}.ini" ) ) {
             // lê o INI e retorna um array
-            $db = parse_ini_file ( "App/Config/{$name}.ini" );
-        } else if ( file_exists ( "App/Config/{$name}.php" ) ) {
-            $db = require "App/Config/{$name}.php";
+            $db = parse_ini_file ( "App/config/{$name}.ini" );
+        } else if ( file_exists ( "App/config/{$name}.php" ) ) {
+            $db = require "App/config/{$name}.php";
         } else {
             // se não existir, lança um erro
             throw new Exception ( "Arquivo '$name' não encontrado" );
