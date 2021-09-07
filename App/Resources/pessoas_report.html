@@ -1,8 +1,8 @@
-<table class="table table-bordered" width="100%">
-	<tr bgcolor="#7A9BCB" style="color: white">
+<table class="table table-bordered w-100">
+	<tr class="table-title">
 		<td colspan="8"><b>Pessoas</b></td>
 	</tr>
-	<tr bgcolor="#C0C3E8">
+	<tr class="header-table">
 		<td>ID</td>
 		<td>Nome</td>
 		<td>Telefone</td>
@@ -12,23 +12,23 @@
 	</tr>
 	{% for pessoa in pessoas %}
 	<tr>
-		<td align="center">
-			{{pessoa.id}}
+		<td class="text-center">
+			{{ pessoa.id }}
 		</td>
 		<td>
-			{{pessoa.nome}}
+			{{ pessoa.nome }}
 		</td>
-		<td align="center">
-			{{pessoa.telefone}}
+		<td class="text-center">
+			{{ pessoa.telefone }}
 		</td>
-		<td align="center">
-			{{pessoa.email}}
+		<td class="text-center">
+			{{ pessoa.email }}
 		</td>
-		<td align="right">
-			R$ {{pessoa.total|number_format(2, ',', '.')}}
+		<td class="text-right">
+			R$ {{ pessoa.total | number_format(2, ',', '.') }}
 		</td>
-		<td align="right">
-			R$ {{pessoa.aberto|number_format(2, ',', '.')}}
+		<td class="text-right">
+			R$ {{ pessoa.aberto | number_format(2, ',', '.') }}
 		</td>
 	</tr>
 	{% endfor %}

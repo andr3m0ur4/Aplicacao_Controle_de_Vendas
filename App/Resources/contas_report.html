@@ -1,5 +1,5 @@
-<table class="table table-bordered" width="100%" style="border-collapse: collapse;border: 1px solid #ddd">
-	<tr bgcolor="#C0C3E8">
+<table class="table table-bordered w-100 table-custom">
+	<tr class="header-table">
 		<td>Emissão</td>
 		<td>Vencimento</td>
 		<td>Cliente</td>
@@ -9,29 +9,29 @@
 	{% set total = 0 %}
 	{% for conta in contas %}
 	<tr>
-		<td align="center">
-			{{conta.dt_emissao|date("d/m/Y")}}
+		<td class="text-center">
+			{{ conta.dt_emissao | date("d/m/Y") }}
 		</td>
-		<td align="center">
-			{{conta.dt_vencimento|date("d/m/Y")}}
+		<td class="text-center">
+			{{ conta.dt_vencimento | date("d/m/Y") }}
 		</td>
 		<td>
-			{{conta.nome_cliente}}
+			{{ conta.nome_cliente }}
 		</td>
-		<td align="right">
-			{{conta.valor|number_format(2, ',', '.')}}
+		<td class="text-right">
+			R$ {{ conta.valor | number_format(2, ',', '.') }}
 		</td>
-		<td align="center" style="color: {{conta.paga == 'S' ? 'green' : 'red'}};">
-			<b> {{conta.paga == 'S' ? 'Sim' : 'Não'}} </b>
+		<td class="text-center {{ conta.paga == 'S' ? 'green' : 'red' }}">
+			<b> {{ conta.paga == 'S' ? 'Sim' : 'Não' }} </b>
 		</td>
 	</tr>
 	{% set total = total + conta.valor %}
 	{% endfor %}
 
-	<tr bgcolor="whiteSmoke">
-		<td align="center" colspan="3">Total</td>
-		<td align="right">
-			{{total|number_format(2, ',', '.')}}
+	<tr class="white-smoke">
+		<td class="text-center" colspan="3">Total</td>
+		<td class="text-right">
+			R$ {{ total | number_format(2, ',', '.') }}
 		</td>
 		<td></td>
 	</tr>

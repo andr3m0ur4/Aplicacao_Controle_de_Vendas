@@ -4,7 +4,7 @@
 	new Chart(document.getElementById("pie-chart"), {
 		type: 'pie',
 		data: {
-			labels: {{ labels | raw }},
+			labels: JSON.parse('{{ labels | raw }}'),
 			datasets: [ {
 				label: "Population (millions)",
 				backgroundColor: [
@@ -28,14 +28,14 @@
 					'rgba(85,116,166,0.5)',
 					'rgba(59,62,172,0.5)'
 				],
-				data: {{data|raw}}
+				data: JSON.parse('{{ data | raw }}')
 			}]
 		},
 		options: {
 			maintainAspectRatio: false,
 			title: {
 				display: true,
-				text: '{{title}}'
+				text: '{{ title }}'
 			}
 		}
 	});

@@ -3,7 +3,7 @@
 	new Chart(document.getElementById("bar-chart"), {
 		type: 'bar',
 		data: {
-			labels: {{labels|raw}},
+			labels: JSON.parse('{{ labels | raw }}'),
 			datasets: [ {
 				label: "Vendas",
 				backgroundColor: [
@@ -27,7 +27,7 @@
 					'rgba(85,116,166,0.5)',
 					'rgba(59,62,172,0.5)'
 				],
-				data: {{data|raw}},
+				data: JSON.parse('{{ data | raw }}'),
 				borderWidth: 2,
 				borderColor: [
 					'rgb(220,57,18)',
@@ -57,7 +57,7 @@
 			maintainAspectRatio: false,
 			title: {
 				display: true,
-				text: '{{title}}'
+				text: '{{ title }}'
 			}
 		}
 	});

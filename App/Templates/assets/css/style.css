@@ -1,0 +1,33 @@
+.header-table {
+    background-color: #C0C3E8;
+}
+
+.table-title {
+    background-color: #7A9BCB;
+    color: white;
+}
+
+.table-custom {
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+.white-smoke {
+    background-color: whiteSmoke;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.vertical-align-middle {
+    vertical-align: middle !important;
+}
+
+.description {
+    font-size: 17pt;
+}

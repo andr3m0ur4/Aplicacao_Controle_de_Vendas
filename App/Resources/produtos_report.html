@@ -1,22 +1,22 @@
-<table class="table table-bordered" width="100%">
-	<tr bgcolor="#7A9BCB" style="color: white">
+<table class="table table-bordered w-100">
+	<tr class="table-title">
 		<td colspan="5"><b>Produtos</b></td>
 	</tr>
 	{% for produto in produtos %}
 	<tr>
-		<td align="center" style="vertical-align: middle;">
-			<span style="font-size: 17pt">
-				{{produto.id}} <br>
-				{{produto.descricao}} <br>
-				{{produto.estoque}} unidades <br>
-				R$ {{produto.preco_venda}}
+		<td class="text-center vertical-align-middle">
+			<span class="description">
+				{{ produto.id }} <br>
+				{{ produto.descricao }} <br>
+				{{ produto.estoque | number_format }} unidades <br>
+				R$ {{ produto.preco_venda | number_format(2, ',', '.') }}
 			</span>
 		</td>
-		<td align="center" style="vertical-align: middle;">
-			{{produto.barcode | raw}}
+		<td class="text-center vertical-align-middle">
+			{{ produto.barcode | raw }}
 		</td>
-		<td align="center" style="vertical-align: middle;">
-			{{produto.qrcode | raw}}
+		<td class="text-center vertical-align-middle">
+			{{ produto.qrcode | raw }}
 		</td>
 	</tr>
 	{% endfor %}
