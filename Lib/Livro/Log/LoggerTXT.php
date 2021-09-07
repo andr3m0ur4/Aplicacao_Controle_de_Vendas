@@ -1,6 +1,6 @@
 <?php
 
-namespace Livro\Database;
+namespace Livro\Log;
 
 /**
  * Implementa o algoritmo de LOG em TXT

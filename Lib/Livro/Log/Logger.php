@@ -1,6 +1,6 @@
 <?php
 
-namespace Livro\Database;
+namespace Livro\Log;
 
 /**
  * Fornece uma interface abstrata para definição de algoritmos de LOG

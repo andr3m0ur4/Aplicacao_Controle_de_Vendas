@@ -11,6 +11,8 @@ use Livro\Database\Repository;
 use Livro\Database\Criteria;
 use Livro\Widgets\Wrapper\FormWrapper;
 use Livro\Widgets\Container\Panel;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class VendasReport extends Page
 {
@@ -37,9 +39,9 @@ class VendasReport extends Page
     
     public function onGera ( )
     {
-        $loader = new Twig_Loader_Filesystem ( 'App/Resources' );
-        $twig = new Twig_Environment ( $loader );
-        $template = $twig -> loadTemplate ( 'vendas_report.html' );
+        $loader = new FilesystemLoader('App/Resources');
+        $twig = new Environment($loader);
+        $template = $twig->loadTemplate('vendas_report.html');
         
         // obtém os dados do formulário
         $dados = $this -> form -> getData ( );

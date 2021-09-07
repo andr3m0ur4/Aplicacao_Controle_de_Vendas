@@ -12,6 +12,7 @@ use Livro\Widgets\Container\VBox;
 use Livro\Widgets\Wrapper\FormWrapper;
 use Livro\Widgets\Wrapper\DatagridWrapper;
 use Livro\Session\Session;
+use Livro\Widgets\Dialog\Message;
 
 class VendasForm extends Page
 {
@@ -94,7 +95,7 @@ class VendasForm extends Page
 			Transaction::close ( 'livro' );						// fecha transação
 
 		} catch ( Exception $e ) {
-			new Message ( 'error', $e -> getMessage ( ) );
+			new Message('error', $e->getMessage());
 		}
 		
 		$this -> onReload ( );		// recarrega a listagem
