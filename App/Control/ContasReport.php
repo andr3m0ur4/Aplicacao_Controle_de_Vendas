@@ -13,6 +13,8 @@ use Livro\Widgets\Container\Panel;
 use Livro\Widgets\Wrapper\FormWrapper;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class ContasReport extends Page
 {
@@ -42,9 +44,9 @@ class ContasReport extends Page
 
 	public function onGera ( )
 	{
-		$loader = new Twig_loader_FileSystem ( 'App/Resources' );
-		$twig = new Twig_Environment ( $loader );
-		$template = $twig -> loadTemplate ( 'contas_report.html' );
+		$loader = new FilesystemLoader('App/Resources');
+		$twig = new Environment($loader);
+		$template = $twig->loadTemplate('contas_report.html');
 
 		// obtém os dados do formulário
 		$dados = $this -> form -> getData ( );
