@@ -2,8 +2,6 @@
 
 namespace Livro\Widgets\Form;
 
-use Livro\Widgets\Base\Element;
-
 /**
  * Representa um campo de um formulário
  * @author André Moura
@@ -12,6 +10,7 @@ abstract class Field implements FormElementInterface
 {
     protected $name;
     protected $size;
+    protected $height;
     protected $value;
     protected $editable;
     protected $formLabel;
@@ -21,11 +20,11 @@ abstract class Field implements FormElementInterface
      * Instancia um campo do formulario
      * @param $name = nome do campo
      */
-    public function __construct ( $name )
+    public function __construct($name)
     {
         // define algumas características iniciais
-        self::setEditable ( true );
-        self::setName ( $name );
+        $this->setEditable(true);
+        $this->setName($name);
     }
     
     /**
@@ -33,12 +32,12 @@ abstract class Field implements FormElementInterface
      * @param $name     Nome da propriedade
      * @param $value    Valor da propriedade
      */
-    public function __set ( $name, $value )
+    public function __set($name, $value)
     {
         // Somente valores escalares
-        if ( is_scalar ( $value ) ) {
+        if (is_scalar($value)) {
             // Armazena o valor da propriedade
-            $this -> setProperty ( $name, $value );
+            $this->setProperty($name, $value);
         }
     }
     
@@ -46,78 +45,77 @@ abstract class Field implements FormElementInterface
      * Retorna o valor da propriedade
      * @param $name Nome da propriedade
      */
-    public function __get ( $name )
+    public function __get($name)
     {
-        return $this -> getProperty ( $name );
+        return $this->getProperty($name);
     }
     
     /**
      * Define o nome do widget
-     * @param $name     = nome do widget
+     * @param $name = nome do widget
      */
-    public function setName ( $name )
+    public function setName($name)
     {
-        $this -> name = $name;
+        $this->name = $name;
     }
     
     /**
      * Retorna o nome do widget
      */
-    public function getName ( )
+    public function getName()
     {
-        return $this -> name;
+        return $this->name;
     }
     
     /**
      * Define o label do widget
      * @param $label = widget label
      */
-    public function setLabel ( $label )
+    public function setLabel($label)
     {
-        $this -> formLabel = $label;
+        $this->formLabel = $label;
     }
     
     /**
      * Retorna o label do widget
      */
-    public function getLabel ( )
+    public function getLabel()
     {
-        return $this -> formLabel;
+        return $this->formLabel;
     }
-
 
     /**
      * Define o valor de um campo
-     * @param $value    = valor do campo
+     * @param $value = valor do campo
      */
-    public function setValue ( $value )
+    public function setValue($value)
     {
-        $this -> value = $value;
+        $this->value = $value;
     }
     
     /**
      * Retorna o valor de um campo
      */
-    public function getValue ( )
+    public function getValue()
     {
-        return $this -> value;
+        return $this->value;
     }
     
     /**
      * Define se o campo poderá ser editado
      * @param $editable = TRUE ou FALSE
      */
-    public function setEditable ( $editable )
+    public function setEditable($editable)
     {
-        $this -> editable = $editable;
+        $this->editable = $editable;
     }
     
     /**
      * Retorna o valor da propriedade $editable
      */
-    public function getEditable ( )
+    public function getEditable()
     {
-        return $this -> editable;
+        return $this->editable;
     }
     
     /**
@@ -125,17 +123,17 @@ abstract class Field implements FormElementInterface
      * @param $name = nome da propriedade
      * @param $valor = valor da propriedade
      */
-    public function setProperty ( $name, $value )
+    public function setProperty($name, $value)
     {
-        $this -> properties[$name] = $value;
+        $this->properties[$name] = $value;
     }
     
     /**
      * Retorna uma propriedade do campo
      */
-    public function getProperty ( $name )
+    public function getProperty($name)
     {
-        return $this -> properties[$name];
+        return $this->properties[$name];
     }
     
     /**
@@ -143,8 +141,9 @@ abstract class Field implements FormElementInterface
      * @param $width = largura em pixels
      * @param $height = altura em pixels (usada em TText)
      */
-    public function setSize ( $width, $height = null )
+    public function setSize($width, $height = null)
     {
-        $this -> size = $width;
+        $this->size = $width;
+        $this->height = $height;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Livro\Widgets\Form;
 
-use Livro\Control\Action;
 use Livro\Control\ActionInterface;
 use Livro\Widgets\Base\Element;
 
@@ -21,44 +20,43 @@ class Button extends Field implements FormElementInterface
      * @param $action = ação do botão
      * @param $label    = rótulo do botão
      */
-    public function setAction ( ActionInterface $action, $label )
+    public function setAction(ActionInterface $action, $label)
     {
-        $this -> action = $action;
-        $this -> label = $label;
+        $this->action = $action;
+        $this->label = $label;
     }
     
     /**
      * Define o nome do formulário para a ação botão
      * @param $name = nome do formulário
      */
-    public function setFormName ( $name )
+    public function setFormName($name)
     {
-        $this -> formName = $name;
+        $this->formName = $name;
     }
     
     /**
      * exibe o botão
      */
-    public function show ( )
+    public function show()
     {
-        $url = $this -> action -> serialize ( );
+        $url = $this->action->serialize();
 
         // define as propriedades do botão
-        $tag = new Element ( 'button' );
-        $tag -> name = $this -> name;   // nome da TAG
-        $tag -> type = 'button';    // tipo do input
-        $tag -> add ( $this -> label );
+        $tag = new Element('button');
+        $tag->name = $this->name;   // nome da TAG
+        $tag->type = 'button';      // tipo do input
+        $tag->add($this->label);
 
         // define a ação do botão
-        $tag -> onclick = "document.{$this -> formName}.action='{$url}'; " . 
-            "document.{$this -> formName}.submit()";
+        $tag->onclick = "document.{$this->formName}.action='{$url}'; " . "document.{$this->formName}.submit()";
 
-        if ( $this -> properties ) {
-            foreach ( $this -> properties as $property => $value ) {
-                $tag -> $property = $value;
+        if ($this->properties) {
+            foreach ($this->properties as $property => $value ) {
+                $tag->$property = $value;
             }
         }
 
-        $tag -> show ( );   // exibe o botão
+        $tag->show();   // exibe o botão
     }
 }

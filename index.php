@@ -1,27 +1,27 @@
 <?php
 
-date_default_timezone_set ( 'America/Sao_Paulo' );
+date_default_timezone_set('America/Sao_Paulo');
 
-if ( version_compare ( PHP_VERSION, '7.0.0' ) == -1 ) {
-    die ( 'A versão mínima do PHP para rodar esta aplicação é: 7.0.0' );
+if (version_compare(PHP_VERSION, '7.0.0') == -1 ) {
+    die('A versão mínima do PHP para rodar esta aplicação é: 7.0.0');
 }
 
 // Library loader
-require_once 'Lib/Livro/Core/ClassLoader.php';
+require_once __DIR__ . '/Lib/Livro/Core/ClassLoader.php';
 $al = new Livro\Core\ClassLoader;
-$al -> addNamespace ( 'Livro', 'Lib/Livro' );
-$al -> register ( );
+$al->addNamespace('Livro', 'Lib/Livro');
+$al->register();
 
 // Aplication loader
-require_once 'Lib/Livro/Core/AppLoader.php';
+require_once __DIR__ . '/Lib/Livro/Core/AppLoader.php';
 $al = new Livro\Core\AppLoader;
-$al -> addDirectory ( 'App/Control' );
-$al -> addDirectory ( 'App/Model' );
-$al -> register ( );
+$al->addDirectory('App/Control');
+$al->addDirectory('App/Model');
+$al->register();
 
 // Vendor
-$loader = require 'vendor/autoload.php';
-$loader -> register ( );
+$loader = require_once __DIR__ . '/vendor/autoload.php';
+$loader->register();
 
 use Livro\Session\Session;
 
@@ -29,12 +29,12 @@ $content = '';
 
 new Session;
 
-if ( Session::getValue ( 'logged' ) ) {
+if (Session::getValue('logged')) {
 	// lê o conteúdo do template
-	$template = file_get_contents ( 'App/Templates/template.html' );
+	$template = file_get_contents('App/Templates/template.html');
 	$class = 'Home';
 } else {
-	$template = file_get_contents ( 'App/Templates/login.html' );
+	$template = file_get_contents('App/Templates/login.html');
 	$class = 'LoginForm';
 }
 

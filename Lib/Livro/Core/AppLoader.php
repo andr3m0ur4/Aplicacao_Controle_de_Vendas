@@ -4,7 +4,6 @@ namespace Livro\Core;
 
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
-use Exception;
 
 /**
  * Carrega a classe da aplicação
@@ -17,36 +16,35 @@ class AppLoader
     /**
      * Adiciona um diretório a ser vasculhado
      */
-    public function addDirectory ( $directory )
+    public function addDirectory($directory)
     {
-        $this -> directories[] = $directory;
+        $this->directories[] = $directory;
     }
     
     /**
      * Registra o AppLoader
      */
-    public function register ( )
+    public function register()
     {
-        spl_autoload_register ( array ( $this, 'loadClass' ) );
+        spl_autoload_register([$this, 'loadClass']);
     }
     
     /**
      * Carrega uma classe
      */
-    public function loadClass ( $class )
+    public function loadClass($class)
     {
-        $folders = $this -> directories;
+        $folders = $this->directories;
         
-        foreach ( $folders as $folder ) {
-            if ( file_exists ( "{$folder}/{$class}.php" ) ) {
+        foreach ($folders as $folder) {
+            if (file_exists("{$folder}/{$class}.php" )) {
                 require_once "{$folder}/{$class}.php";
                 return true;
             } else {
-                if ( file_exists ( $folder ) ) {
-                    foreach ( new RecursiveIteratorIterator ( new RecursiveDirectoryIterator ( $folder ),
-                                                    RecursiveIteratorIterator::SELF_FIRST ) as $entry ) {
-                        if ( is_dir ( $entry ) ) {
-                            if ( file_exists ( "{$entry}/{$class}.php" ) ) {
+                if (file_exists($folder)) {
+                    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($folder), RecursiveIteratorIterator::SELF_FIRST) as $entry) {
+                        if (is_dir($entry)) {
+                            if (file_exists("{$entry}/{$class}.php")) {
                                 require_once "{$entry}/{$class}.php";
                                 return true;
                             }

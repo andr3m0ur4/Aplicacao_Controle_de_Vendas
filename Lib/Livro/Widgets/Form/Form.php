@@ -19,43 +19,43 @@ class Form
      * Instancia o formulário
      * @param $name = nome do formulário
      */
-    public function __construct ( $name = 'my_form' )
+    public function __construct($name = 'my_form')
     {
-        $this -> setName ( $name );
+        $this->setName($name);
     }
     
     /**
      * Define o nome do formulário
      * @param $name = nome do formulário
      */
-    public function setName ( $name ) 
+    public function setName($name) 
     {
-        $this -> name = $name;
+        $this->name = $name;
     }
     
     /**
      * Retorna o nome do formulário
      */
-    public function getName ( )
+    public function getName()
     {
-        return $this -> name;
+        return $this->name;
     }
     
     /**
      * Define o título do formulário
      * @param $title Título
      */
-    public function setTitle ( $title ) 
+    public function setTitle($title) 
     {
-        $this -> title = $title;
+        $this->title = $title;
     }
     
     /**
      * Retorna o título do formulário
      */
-    public function getTitle ( )
+    public function getTitle()
     {
-        return $this -> title;
+        return $this->title;
     }
     
     /**
@@ -64,11 +64,11 @@ class Form
      * @param $object    Field Object
      * @param $size      Field Size
      */
-    public function addField ( $label, FormElementInterface $object, $size = '100%' )
+    public function addField($label, Field $object, $size = '100%')
     {
-        $object -> setSize ( $size );
-        $object -> setLabel ( $label );
-        $this -> fields[$object -> getName ( )] = $object;
+        $object->setSize($size);
+        $object->setLabel($label);
+        $this->fields[$object->getName()] = $object;
     }
     
     /**
@@ -76,36 +76,36 @@ class Form
      * @param $label  Action Label
      * @param $action TAction Object
      */
-    public function addAction ( $label, ActionInterface $action )
+    public function addAction($label, ActionInterface $action)
     {
-        $this -> actions[$label] = $action;
+        $this->actions[$label] = $action;
     }
     
     /**
      * Retorna os campos
      */
-    public function getFields ( )
+    public function getFields()
     {
-        return $this -> fields;
+        return $this->fields;
     }
     
     /**
      * Retorna as ações
      */
-    public function getActions ( )
+    public function getActions()
     {
-        return $this -> actions;
+        return $this->actions;
     }
     
     /**
      * Atribui dados aos campos do formulário
      * @param $object = objeto com dados
      */
-    public function setData ( $object )
+    public function setData($object)
     {
-        foreach ( $this -> fields as $name => $field ) {
-            if ( $name AND isset ( $object -> $name ) ) {
-                $field -> setValue ( $object -> $name );
+        foreach ($this->fields as $name=>$field) {
+            if ($name && isset($object->$name)) {
+                $field->setValue($object->$name);
             }
         }
     }
@@ -113,19 +113,20 @@ class Form
     /**
      * Retorna os dados do formulário em forma de objeto
      */
-    public function getData ( $class = 'stdClass' ) 
+    public function getData($class = 'stdClass') 
     {
         $object = new $class;
 
-        foreach ( $this -> fields as $key => $fieldObject ) {
-            $val = isset ( $_POST[$key] ) ? $_POST[$key] : '';
-            $object -> $key = $val;
+        foreach ($this->fields as $key=>$fieldObject) {
+            $val = $_POST[$key] ?? '';
+            $object->$key = $val;
         }
 
         // percorre os arquivos de upload
-        foreach ( $_FILES as $key => $content ) {
-            $object -> $key = $content['tmp_name'];
+        foreach ($_FILES as $key=>$content) {
+            $object->$key = $content['tmp_name'];
         }
+        
         return $object;
     }
 }

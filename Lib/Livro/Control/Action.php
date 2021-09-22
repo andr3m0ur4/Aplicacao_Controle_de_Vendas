@@ -15,9 +15,9 @@ class Action implements ActionInterface
      * Instancia uma nova ação
      * @param $action = método a ser executado
      */
-    public function __construct ( Callable $action )
+    public function __construct(Callable $action)
     {
-        $this -> action = $action;
+        $this->action = $action;
     }
     
     /**
@@ -25,28 +25,26 @@ class Action implements ActionInterface
      * @param $param = nome do parâmetro
      * @param $value = valor do parâmetro
      */
-    public function setParameter ( $param, $value )
+    public function setParameter($param, $value)
     {
-        $this -> param[$param] = $value;
+        $this->param[$param] = $value;
     }
     
     /**
      * Transforma a ação em uma string do tipo URL
      */
-    public function serialize ( )
+    public function serialize()
     {
         // verifica se a ação é um método
-        if ( is_array ( $this -> action ) ) {
+        if (is_array($this->action)) {
             // obtém o nome da classe
-            $url['class'] = is_object ( $this -> action[0] ) 
-                ? get_class ( $this -> action[0] ) 
-                : $this -> action[0];
+            $url['class'] = is_object($this->action[0]) ? get_class($this->action[0]) : $this->action[0];
 
             // obtém o nome do método
-            $url['method'] = $this -> action[1];
+            $url['method'] = $this->action[1];
             
             // verifica se há parâmetros
-            if ( $this -> param ) {
+            if ($this->param) {
                 $url = array_merge($url, $this->param);
             }
 

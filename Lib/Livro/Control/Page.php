@@ -12,28 +12,29 @@ class Page extends Element
     /**
      * Método construtor
      */
-    public function __construct ( )
+    public function __construct()
     {
-        parent::__construct ( 'div' );
+        parent::__construct('div');
     }
     
     /**
      * Executa determinado método de acordo com os parâmetros recebidos
      */
-    public function show ( )
+    public function show()
     {
-        if ( $_GET ) {
-            $class  = isset ( $_GET['class'] ) ? $_GET['class'] : NULL;
-            $method = isset ( $_GET['method'] ) ? $_GET['method'] : NULL;
+        if ($_GET) {
+            $class  = $_GET['class'] ?? null;
+            $method = $_GET['method'] ?? null;
             
-            if ( $class ) {
-                $object = $class == get_class ( $this ) ? $this : new $class;
-                if ( method_exists ( $object, $method ) ) {
-                    call_user_func ( array ( $object, $method ), $_GET );
+            if ($class) {
+                $object = $class == get_class($this) ? $this : new $class;
+
+                if (method_exists($object, $method)) {
+                    call_user_func([$object, $method], $_GET);
                 }
             }
         }
         
-        parent::show ( );
+        parent::show();
     }
 }
